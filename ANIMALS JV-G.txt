@@ -1,0 +1,77 @@
+
+//Animals
+//        *******************
+
+
+public abstract class Animals {
+
+    public abstract void sound();
+
+    public abstract void feed();
+
+    public abstract String name();
+
+}
+
+//*******************
+//        Dog
+//        *******************
+
+ class Dog extends Animals {
+
+    public void sound(){
+        System.out.println("Woof Woof");
+    }
+
+    public void feed(){
+        System.out.println("You bought a steak and fed it to your dog\nyour dog is happy!!");
+    }
+
+     public String name(){
+         return "Dog";
+     }
+}
+
+//*******************
+//        Cat
+//        *******************
+//
+
+ class Cat extends Animals{
+
+
+    public void sound(){
+        System.out.println("Meoooow");
+    }
+
+    public void feed(){
+        System.out.println("You bought a fish and fed it to your cat\nyour cat is happy!!");
+    }
+
+     public String name(){
+         return "Cat";
+     }
+
+}
+
+//*******************
+//        Bird
+//        *******************
+//
+
+ class Bird extends Animals {
+
+
+    public void sound(){
+        System.out.println("chirp chirp");
+    }
+
+    public void feed(){
+        System.out.println("You bought some seeds and fed it to your bird your bird is happy!!");
+    }
+
+     public String name(){
+         return "Bird";
+     }
+
+}

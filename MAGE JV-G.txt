@@ -1,0 +1,36 @@
+//public class Mage {
+//}
+//Mage
+//        *********************
+
+
+public class Mage extends Player {
+
+    int Res;
+
+    Mage (){
+        super();
+        Res = 30;
+        Hp = 50;
+        Lv = 1;
+        Atk = 20;
+        Money = 50;
+        MAXHP = Hp;
+
+    }
+
+    public String Lvlup(int xp , int lv){
+        if(xp >= (lv*10)){
+            this.Res += 3;
+            this.MAXHP += 15;
+
+            this.Atk += 10;
+            this.Money += 10;
+            this.Xp = 0;
+            this.Lv += 1;
+            return ("Congrats you have reached level " + this.Lv + " your stats have increaased" );
+        }
+        else
+            return ("you dont have enough xp to level up yet" );
+    }
+}

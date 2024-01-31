@@ -1,0 +1,24 @@
+//public class Clinic {
+//    /*clinic
+//     ******************
+//     */
+
+    public class Clinic extends Player {
+
+
+        public void healPlayer(Archer a, Warrior w, Mage m){
+            a.Hp = a.MAXHP;
+            a.Money -= 5;
+            w.Hp = w.MAXHP;
+            w.Money-= 5;
+            m.Hp = m.MAXHP;
+            m.Money -= 5;
+
+
+        }
+
+
+
+    }
+
+

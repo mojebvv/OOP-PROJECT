@@ -1,0 +1,72 @@
+
+    //player
+
+    //********************
+    public class Player {
+        String name;
+        public int Hp , Lv , Atk , Money, MAXHP , Xp;
+        Player (){
+
+        }
+
+        public String getName(){
+            return this.name;
+        }
+
+
+
+        public String getDagger(){
+            return this.name;
+        }
+
+        public int getHp(){
+            return this.Hp;
+        }
+
+        public int getLv(){
+            return this.Lv;
+        }
+
+
+        public int getAtk(){
+            return this.Atk;
+        }
+
+        public int getMoney(){
+            return this.Money;
+        }
+
+        public void setName (String name){
+            this.name = name;
+        }
+
+        public void setHp (int hp){
+            this.Hp = hp;
+        }
+
+        public void setAtk (int atk){
+            this.Atk = atk;
+        }
+
+
+        public void setLv(int Lv){
+            this.Lv = Lv;
+        }
+
+        public void setMoney(int Mo){
+            this.Money = Mo;
+        }
+
+        public String toString(){
+            return ("Name:" + this.name+ ", Hp: " + this.Hp +", Atk: " + this.Atk + ", Lvl: " + this.Lv );
+
+
+        }
+        public String Lvlup(int xp , int lv){
+
+            return " ";
+        }
+    }
+
+
+

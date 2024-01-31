@@ -1,0 +1,358 @@
+//public class Cave {
+//}
+//Cave
+//        *******************
+
+import java.util.Random;
+import java.util.Scanner;
+
+
+
+
+
+public class Cave {
+
+    public enum ENEMIES {
+        GOBLIN , // hp40 atk 5
+        SKELETON , // hp 65 atk 10
+        GHOST ,// hp 80 atk 15
+        ZOMBIE ,// hp 90 atk 20
+    }
+
+
+
+    public int RNG() {
+        int min = 0 , max = 3;
+        Random random = new Random();
+        return random.nextInt((max - min) + 1) + min;
+    }
+
+
+
+    public boolean Battle (Mage M ,Archer A , Warrior W , boolean m , boolean a , boolean w , int weapon){
+        boolean cp=false , mp =false;
+        int mhp=0 , matk=0;
+        int xp = 0 , coins = 10;
+        int crit;
+        String monster = "";
+        int Monster = RNG();
+        switch(Monster)
+        {
+            case (0):
+                monster = "Goblin";
+                mhp = 40;
+                matk =5;
+                xp = 8;
+                break;
+            case (1):
+                monster = "Skeleton";
+                mhp = 65;
+                matk = 5;
+                xp = 15;
+                break;
+            case (2):
+                monster = "Ghost";
+                mhp = 80;
+                matk = 5;
+                xp = 26;
+                break;
+            case (3):
+                monster = "Zombie";
+                mhp = 90;
+                matk = 5;
+                xp = 30;
+                break;
+        }
+
+
+
+
+        int Ch;
+        Scanner input = new Scanner(System.in);
+        boolean escape = false;
+
+        if (a == true){
+            boolean chance;
+            boolean pdie=true;
+            boolean Mdie=true;
+            //Archer
+            while(pdie)
+            {
+
+                if(mhp<=0)
+                {
+                    System.out.println("you won");
+                    return true;
+
+                }
+                System.out.println("The "+monster+" health is: " + mhp + "\n your health is: "+A.Hp+"\n  what do you want to do? 1 ATK 2 Escape");
+                Ch = input.nextInt();
+                switch(Ch)
+                {
+                    case 1:
+                    {
+
+
+                        chance=A.EvadeChance(A.evade);
+                        if(chance==true)
+                        {
+                            System.out.println("you evaded the "+monster+" attack");
+                            mhp= mhp - (A.Atk+weapon);
+                            System.out.println("you attacked the "+monster+" for "+(A.Atk+weapon)+" points");
+
+                        }
+                        else if(chance==false)
+                        {
+                            A.Hp-=matk;
+                            System.out.println("the "+monster+"attacked you for "+matk+" points");
+                            if(A.Hp<=0)
+                            {
+                                System.out.println("you have been beaten but you maneged to scavange some coin and your health is 1");
+                                pdie=false;
+                                return false;
+
+                            }
+                            else if(A.Hp>0)
+                            {
+                                mhp=mhp- (A.Atk+weapon);
+                                System.out.println("you attacked the "+monster+" for "+(A.Atk+weapon)+" points");
+                            }
+
+                        }
+
+
+
+
+
+                        break;
+                    }
+
+                    case(2):
+                        escape = true;
+                        return false;
+                    default:
+                        System.out.println("CHOOSE");
+
+                }
+
+
+            }
+        }//end of Archer fight loop
+
+        else if (m == true){
+            //Mage fight loop
+            while( escape == false && mhp > 0 && cp==false){
+                System.out.println("The "+monster+" health is" + mhp + " what do you want to do? 1 ATK 2 Escape");
+                Ch = input.nextInt();
+                switch(Ch)
+                {
+                    case(1):
+
+                        mhp -= (M.Atk + weapon);
+                        System.out.println("You casted a magic spell that damaged the " + monster + " for " + (M.Atk + weapon)+ " points of damage");
+                        if (mhp <= 0){
+
+                            System.out.println("You have beaten the " + monster + "!!! \n You gained 10 coins and 10 Exp");
+                            return true;
+
+                        }
+                        else
+                            M.Hp -= (matk - ((M.Res/100)*matk));
+                        System.out.println("Your heslth is: " + M.Hp);
+                        if (M.Hp<=0)
+                            return false;
+
+                        break;
+
+
+                    case(2):
+                        escape = true;
+                        return false;
+                    default:
+                        System.out.println("CHOOSE");
+                }
+
+
+
+            }
+        }// end of mage fight loop
+
+        else if (w == true){
+            //Warrior fight loop
+            while( escape == false && mhp > 0 && cp==false){
+                System.out.println("The "+monster+" health is" + mhp + " what do you want to do? 1 ATK 2 Escape");
+                Ch = input.nextInt();
+                switch(Ch)
+                {
+                    case(1):
+                        crit = (W.Atk + ( W.Atk * (W.CritDmg()/100)) + weapon);
+                        mhp -= crit;
+                        System.out.println("You attaked with your sword and dealt "+ crit +" damage to the "+ monster);
+                        if (mhp <= 0){
+
+                            System.out.println("You have beaten the " + monster + "!!! \n You gained 10 coins and 10 Exp");
+                            return true;
+                        }
+                        else
+                            W.Hp -= matk;
+                        System.out.println("Your health is: " + W.Hp);
+                        if (W.Hp<=0)
+                            return false;
+
+                        break;
+
+
+                    case(2):
+                        escape = true;
+                        return false;
+                    default:
+                        System.out.println("CHOOSE");
+                }
+
+
+
+            }
+        }//end of Warrior fight loop
+
+
+        return false;
+    }
+
+    public boolean ENDGAME(Mage M ,Archer A , Warrior W , boolean m , boolean a , boolean w , int weapon){
+
+        int dragonh = 300 , dragona = 45;
+        int choice;
+        boolean chance;
+        boolean palive=true;
+        boolean Mdie =true;
+        int Ch , crit;
+        Scanner input = new Scanner(System.in);
+
+        while(palive == true){
+            System.out.println("You are facing the mighty dragon!! it's healt is :"+dragonh+"\nwhat do you want to do? 1-Atk 2-Try to escape");
+            Ch = input.nextInt();
+            switch(Ch){
+                case 1:{
+                    if (m){
+                        dragonh -= (M.Atk + weapon);
+                        System.out.println("You casted a magic spell that damaged the Dragon for " + (M.Atk + weapon)+ " points of damage");
+                        if (dragonh <= 0)
+                        {
+
+                            System.out.println("You have defeated the Dragon!!! \nyou have freed the city...but your journey continues...");
+                            return true;
+
+                        }
+                        else
+                        {
+                            M.Hp -= (dragona - ((M.Res/100)*dragona));
+                            System.out.println("The dragon has attacked you dealing "+dragona+" damage!!\nYour health is: " + M.Hp);
+                        }
+                        if (M.Hp<=0)
+                        {
+                            System.out.println("you started coughing blood...the light starts to fade...you...are...dead...");
+                            return false;
+                        }
+                    }
+                    else if (w){
+                        crit = (W.Atk + ( W.Atk * (W.CritDmg()/100)) + weapon);
+                        dragonh -= crit;
+                        System.out.println("You attaked with your sword and dealt "+ crit +" damage to the dragon");
+                        if (dragonh <= 0)
+                        {
+
+                            System.out.println("You have defeated the Dragon!!! \nyou have freed the city...but your journey continues...");
+                            return true;
+
+                        }
+                        else
+                        {
+                            W.Hp -= dragona ;
+                            System.out.println("The dragon has attacked you dealing "+dragona+" damage!!\nYour health is: " + W.Hp);
+                        }
+                        if (W.Hp<=0)
+                        {
+                            System.out.println("you started coughing blood...the light starts to fade...you...are...dead...");
+                            return false;
+                        }
+                    }
+                    else if (a == true){
+
+                        boolean pdie=true;
+
+                        //Archer
+                        while(pdie)
+                        {
+
+
+                            System.out.println("The dragon health is: " + dragonh + "\n your health is: "+A.Hp+"\n  what do you want to do? 1 ATK 2 Escape");
+                            Ch = input.nextInt();
+                            switch(Ch)
+                            {
+                                case 1:
+                                {
+
+
+                                    chance=A.EvadeChance(A.evade);
+                                    if(chance==true)
+                                    {
+                                        System.out.println("you evaded the dragon attack");
+                                        dragonh = dragonh - (A.Atk+weapon);
+                                        System.out.println("you attacked the dragon for "+(A.Atk+weapon)+" points");
+
+                                    }
+                                    else if(chance==false)
+                                    {
+                                        A.Hp-=dragona;
+                                        System.out.println("the dragonattacked you for "+dragona+" points");
+                                        if(A.Hp<=0)
+                                        {
+                                            System.out.println("you started coughing blood...the light starts to fade...you...are...dead...");
+                                            return false;
+
+                                        }
+                                        else if(A.Hp>0)
+                                        {
+                                            dragonh = dragonh - (A.Atk+weapon);
+                                            System.out.println("you attacked the dragon for "+(A.Atk+weapon)+" points");
+                                        }
+
+                                    }
+
+
+
+                                    if (dragonh <= 0)
+                                    {
+
+                                        System.out.println("You have defeated the Dragon!!! \nyou have freed the city...but your journey continues...");
+                                        return true;
+
+                                    }
+
+                                    break;
+                                }
+
+
+
+
+
+
+                            }
+
+
+                        }
+                    }//end of Archer fight loop
+                    break;
+                }
+
+
+                default:
+                    System.out.print("You tried running but the dragon drifted its body infront of you!!\nTHERE IS NO ESCAPE FROM REALITY\n");
+                    break;
+
+            }
+
+        }
+        return false;
+    }
+}

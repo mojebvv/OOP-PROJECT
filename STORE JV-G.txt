@@ -1,0 +1,131 @@
+//public class Store {
+//    /*Store
+//     ******************
+//     */
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+    public class Store {
+
+        ArrayList<String> Magew = new ArrayList<>();
+        ArrayList<Integer> Magep = new ArrayList<>();
+        ArrayList<Integer> Maged = new ArrayList<>();
+        ArrayList<String> Warriorw = new ArrayList<>();
+        ArrayList<Integer> Warriorp = new ArrayList<>();
+        ArrayList<Integer> Warriord = new ArrayList<>();
+        ArrayList<String> Archerw = new ArrayList<>();
+        ArrayList<Integer> Archerp = new ArrayList<>();
+        ArrayList<Integer> Archerd = new ArrayList<>();
+        Scanner input = new Scanner(System.in);
+        int Choice;
+
+
+        //sets items immediatily
+        public void setItems() {
+
+            Magew.add("Magic staff");
+            Magew.add("La virta");
+            Magew.add("gold satff");
+            Magew.add("enhanced satff");
+
+            Warriorw.add("starter sword");
+            Warriorw.add("iron sword");
+            Warriorw.add("gold sword");
+            Warriorw.add("enhanced sword");
+
+            Archerw.add("starter bow");
+            Archerw.add("iron bow");
+            Archerw.add("gold bow");
+            Archerw.add("enhanced bow");
+
+        }
+
+
+        //sets item prices and damage immediatily
+        public void setItem_Stat() {
+            Archerd.add(20);
+            Archerd.add(30);
+            Archerd.add(40);
+            Archerd.add(50);
+            Archerp.add(30);
+            Archerp.add(40);
+            Archerp.add(50);
+            Archerp.add(60);
+            Maged.add(20);
+            Maged.add(30);
+            Maged.add(40);
+            Maged.add(50);
+            Magep.add(30);
+            Magep.add(40);
+            Magep.add(50);
+            Magep.add(60);
+            Warriord.add(20);
+            Warriord.add(30);
+            Warriord.add(40);
+            Warriord.add(50);
+            Warriorp.add(30);
+            Warriorp.add(40);
+            Warriorp.add(50);
+            Warriorp.add(60);
+        }
+
+        //prints the store of mage
+        public void getItems_Mage (){
+            System.out.println("weapon " +Magew);
+            System.out.println("damage "+Maged);
+            System.out.println("price "+Magep);
+        }
+
+        //adds to the store of mage (only for admin)
+        public void addItems_Mage (){
+            System.out.println("weapons: " + Magew);
+            System.out.println("Damage: " + Maged);
+            System.out.println("Prices: " +Magep);
+
+            System.out.println("\n\nEnter the weapon you want to add followed by the damage then price: \n");
+            Magew.add(input.next());
+            Maged.add(input.nextInt());
+            Magep.add(input.nextInt());
+        }
+
+        //prints the store of warrior
+        public void getItems_Warrior (){
+            System.out.println("weapon " +Warriorw);
+            System.out.println("damage "+Warriord);
+            System.out.println("price "+Warriorp);
+        }
+
+        //adds to the store of warrior (admin only)
+        public void addItems_Warrior (){
+            System.out.println("weapons: " + Warriorw);
+            System.out.println("Damage: " + Warriord);
+            System.out.println("Prices: " +Warriorp);
+
+            System.out.println("\n\nEnter the weapon you want to add followed by the damage then price: \n");
+            Warriorw.add(input.next());
+            Warriord.add(input.nextInt());
+            Warriorp.add(input.nextInt());
+        }
+
+        //prints the store of archer
+        public void getItems_Archer (){
+            System.out.println("weapon " +Archerw);
+            System.out.println("damage "+Archerd);
+            System.out.println("price "+Archerp);
+        }
+
+        //adds to the store of archer (admin only)
+        public void addItems_Archer (){
+            System.out.println("weapons: " + Archerw);
+            System.out.println("Damage: " + Archerd);
+            System.out.println("Prices: " +Archerp);
+
+            System.out.println("\n\nEnter the weapon you want to add followed by the damage then price: \n");
+            Archerw.add(input.next());
+            Archerd.add(input.nextInt());
+            Archerp.add(input.nextInt());
+        }
+
+    }
+

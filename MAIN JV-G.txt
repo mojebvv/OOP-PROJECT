@@ -1,0 +1,422 @@
+//public class Main {
+//
+//Project
+//    main
+//*******************
+
+import java.util.Scanner;
+
+    public class Main {
+
+        public static Scanner input = new Scanner(System.in);
+
+
+        public static void main(String[] args) {
+            int in , location;
+
+            //pets
+            Animals[]  animals = new Animals[3];
+            animals[0] = new Dog();
+            animals[1] = new Cat();
+            animals[2] = new Bird();
+            int pet;
+
+            //player objs
+            Player player = new Player();
+            Mage mage = new Mage();
+            Warrior warrior = new Warrior();
+            Archer archer = new Archer();
+
+            //admin obj
+            Archer x = new Archer();
+            x.evade = 100;
+
+            //Locations location[cave , store , clinic]
+            Cave cave = new Cave();
+            Store store = new Store();
+            Clinic clinic = new Clinic();
+
+            int Choice = 0 , C2  ; // general
+            int CA , CAS  , CASS ; // admin
+            int stat = 0;
+            String name = " ";
+            boolean quit = false;
+
+            boolean M = false , W = false , A = false;
+
+            System.out.println("Start (1) or exit (2)");
+
+
+            while(Choice != 1 && Choice != 2){
+                Choice= input.nextInt();
+
+
+                switch (Choice)
+                {
+
+                    case 1:
+                    {    //play
+                        store.setItems();
+                        store.setItem_Stat();
+                        System.out.println("Are you an Admin or a Player?");
+                        C2 = input.nextInt();
+                        switch(C2)
+                        {
+
+                            case 1://admin case
+
+                                CA = 1;
+                                while (CA != 1 || CA != 2 || CA != 3 ){
+                                    if(quit)
+                                        break;
+                                    System.out.println("Do you want to edit the store or the stats ot try the end game? exit 0");
+                                    CA = input.nextInt();
+                                    switch(CA){
+                                        case 1://edit store case
+                                            System.out.println("Mage warrior or archer store?");
+                                            CAS = input.nextInt();
+                                            switch(CAS){
+                                                case 1 ://edit mage case
+
+                                                    System.out.println("Do you want to add or delete?");
+                                                    CASS = input.nextInt();
+                                                    switch(CASS){
+                                                        case 1://add
+                                                            store.addItems_Mage();
+                                                            break;
+                                                        case 2://delete
+                                                            System.out.println(store.Magew);
+                                                            System.out.println("Chose the index:");
+                                                            stat = input.nextInt();
+                                                            store.Magew.remove(stat-1);
+
+                                                            store.Maged.remove(stat-1);
+
+                                                            store.Magep.remove(stat-1);
+                                                            System.out.println(store.Magew);
+                                                            break;
+                                                    }
+                                                    store.getItems_Mage();
+                                                    break;
+//end of edit mage case
+                                                case 2://edit warrior
+
+                                                    System.out.println("Do you want to add or delete?");
+                                                    CASS = input.nextInt();
+                                                    switch(CASS){
+                                                        case 1://add
+                                                            store.addItems_Warrior();
+                                                            break;
+                                                        case 2://delete
+                                                            System.out.println(store.Warriorw);
+                                                            System.out.println("Chose the index:");
+                                                            stat = input.nextInt();
+                                                            store.Warriorw.remove(stat-1);
+
+                                                            store.Warriord.remove(stat-1);
+
+                                                            store.Warriorp.remove(stat-1);
+                                                            System.out.println(store.Warriorw);
+                                                            break;
+                                                    }
+                                                    store.getItems_Warrior();
+                                                    break;
+//end of edit warrior
+                                                case 3://edit Archer
+
+                                                    System.out.println("Do you want to add or delete?");
+                                                    CASS = input.nextInt();
+                                                    switch(CASS){
+                                                        case 1://add
+                                                            store.addItems_Archer();
+                                                            break;
+                                                        case 2://delete
+                                                            System.out.println(store.Archerw);
+                                                            System.out.println("Chose the index:");
+                                                            stat = input.nextInt();
+                                                            store.Archerw.remove(stat-1);
+
+                                                            store.Archerd.remove(stat-1);
+
+                                                            store.Archerp.remove(stat-1);
+                                                            System.out.println(store.Archerw);
+                                                            break;
+                                                    }
+                                                    store.getItems_Archer();
+                                                    break;
+//end of edit archer
+                                                default:
+                                                    System.out.println("you must enter a valid number");
+                                            }
+                                            break;  //end of edit store
+                                        case 2: //edit stats
+                                            System.out.println("Enter your Hp");
+                                            stat = input.nextInt();
+                                            x.setHp(stat);
+                                            System.out.println("Enter your Lvl");
+                                            stat = input.nextInt();
+                                            x.setLv(stat);
+                                            System.out.println("Enter your Atk");
+                                            stat = input.nextInt();
+                                            x.setAtk(stat);
+
+                                            System.out.println("New stats \n HP: " + x.getHp() + " \n Lv: " + x.getLv() + "\n Atk: " + x.getAtk()+ " ");
+                                            break;
+// end of edit stats
+
+                                        case 3: // endgame
+                                            cave.ENDGAME(mage, x, warrior, M, true, W, stat);
+                                            break;
+                                        case 0:
+                                            quit = true;
+                                            break;
+
+                                        default:
+                                            System.out.println("Invalid input");
+                                    } //end of switch admin
+                                }//end of admin while loop
+                                break;
+//end of admin case
+                            case 2:
+                                // player case
+                                System.out.println("Narrator: \nyou woke up in the middle of a forest with trees filling the horizon\n to the point no light can pass through and after realizing you don't know where you are\n you heard a strange sound 'that couldn't be the sound of an animal' you said as you approach the source\n whilst approaching you saw a green creature with long ears and skinny torso standing over a dead dear\n 'oh god did it...' whispered with a trembling voice as you stumbled over a branch \n the weird creture seemed to have noticed you and approaching\n now its kill or be killed. 1 to continue");
+                                in = input.nextInt();
+                                if (in == 1){
+                                    System.out.println("... \n ... \n ... \npress 1 to continue");
+                                    in = 0;
+                                    in = input.nextInt();
+                                }
+                                if (in == 1){
+                                    System.out.println("you open your eyes to a knight in a golden shining suit of armor and beat the monster\n 'Are you okay?' the knight asked \n'y-y-yes thank you' \n  press 1 to continue");
+                                    in = 0;
+                                    in = input.nextInt();
+                                }
+                                if (in == 1){
+                                    System.out.println("both of you sat around a fire the knight lit\n 'by the way i never got your name' you said this while looking at his missing arm \n 'it's jamie, and you?' \n my name is... \n(Enter your name) ");
+                                    name = input.next();
+                                    player.setName(name);
+                                    System.out.println("it's " + player.getName() + " , thank you ser jamie. \nafter some time passed the knight told you about a town where you can go and explore\n\n so you went there... \npress 1 to continue");
+                                    in = 0;
+                                    in = input.nextInt();
+                                }
+                                if (in == 1){
+                                    System.out.println("'hello fellow adventurer' a man said as you entered the tavern at nove gaurd\nlooking at you he could see that youre of no experience\n he offered to train you into one of three classes\nMage: low health normal damage with the special ability: resistance (decreses the incoming damage)\nArcher low damage normal health with the special ability: evasion (you have a chance to evade an attack)\nWarrior high health high damage with the special ability: Crit (a slim chance to deal more damage) \npress 1 2 or 3 to choose respectevily to choose your class: ");
+                                    in = input.nextInt();
+                                }
+                                switch(in){ // class select switch
+                                    case 1:
+                                        M = true;
+                                        break;
+                                    case 2:
+                                        A = true;
+                                        break;
+                                    case 3:
+                                        W = true;
+                                        break;
+                                } //end of class select switch
+
+                                System.out.println("Choose your companion\n1-A Dog\n2-A Cat\n3-A bird\nNote: the companions will have no effect on the game, but you can feed them and pet them.");
+                                pet = input.nextInt();
+                                pet--; // to get a pet in your journey
+                                System.out.println("As you have selected your class you can now start your journey...");
+                                System.out.println("'Whew... finally' you said in relief grasping for air as you heard a familiar voice approach you \n 'Hey " + name + " \n");
+                                //explain story
+                                System.out.println("Its the same person that introduced you to the guild the other day! 'there are monsters in the cave and the guild requested the aid of adventurers to aid them in holding them back and i wanted to inform you ' He said, you thought about it a bit then said 'well...I can finally check out my training' and accepted the request...\n\n");
+
+
+                                System.out.println("Where do you want to go?\n1-cave \n2-store \n3-clinic\n4-pet your " + animals[pet].name());
+                                location = input.nextInt();
+                                while (archer.Lv < 10 && warrior.Lv < 10 && mage.Lv < 10 ){ //a loop for the player gameplay until they reach the end game
+                                    switch(location){
+//location switch
+
+                                        case 1: // cave
+                                            System.out.println("as you entered the cave you heard a sound of a monster");
+                                            if(cave.Battle(mage, archer, warrior, M, A, W, stat)){
+
+                                                if (A==true){
+
+                                                    archer.Xp += 10;
+                                                    archer.Lvlup(archer.Xp, archer.Lv);
+                                                    System.out.println("Your current level is: " + archer.Lv);
+                                                }
+                                                else if(M==true){
+
+                                                    mage.Xp += 10;
+                                                    mage.Lvlup(mage.Xp, mage.Lv);
+                                                    System.out.println("Your current level is: " + mage.Lv);
+                                                }
+                                                else if (W==true){
+
+                                                    warrior.Xp += 10;
+                                                    warrior.Lvlup(warrior.Xp, warrior.Lv);
+                                                    System.out.println("Your current level is: " + warrior.Lv);
+                                                }
+                                                System.out.println("your special attribute has leveled up!!");
+                                            }
+
+                                            System.out.println("Do you want to continue roaming the cave or go out?\n1-continue\n2-go to store\n3-go to clinic\n4-pet your " + animals[pet].name());
+                                            location = input.nextInt();
+                                            break;
+//cave case ends
+                                        case 2: // store
+                                        {
+                                            System.out.println("Welcome to the store " + name + "\nsee what suits you:");
+                                            if (A){//archer store begins
+                                                store.getItems_Archer();
+                                                System.out.println("\nYou have " + archer.Money + "coins chose what do you want to buy:\n");
+                                                in = input.nextInt();
+                                                if(store.Archerp.get(in-1) <= archer.Money){
+                                                    System.out.println("You have bought " + store.Archerw.get(in-1) + "!!");
+                                                    archer.Money = archer.Money - store.Archerp.get(in-1);
+                                                    stat = store.Archerd.get(in-1);
+
+                                                    store.Archerw.remove(in-1);
+                                                    store.Archerp.remove(in-1);
+                                                    store.Archerd.remove(in-1);
+
+
+                                                }
+                                                //archer store ends
+                                                else
+                                                    System.out.println("You don't have enough money!! go out and earn some!!");
+                                                System.out.println("Where do you want to go? \n1-cave\n2-store\n3-clinic\n4-pet your " + animals[pet].name());
+                                                location = input.nextInt();
+
+                                                break;
+                                            }
+
+                                            else if(M){//mage store begins
+                                                store.getItems_Mage();
+                                                System.out.println("\nYou have " + mage.Money + "coins chose what do you want to buy:\n");
+                                                in = input.nextInt();
+                                                if(store.Magep.get(in-1) <= mage.Money){
+                                                    System.out.println("You have bought " + store.Magew.get(in-1) + "!!");
+                                                    mage.Money = mage.Money - store.Magep.get(in-1);
+                                                    stat = store.Maged.get(in-1);
+
+                                                    store.Magew.remove(in-1);
+                                                    store.Magep.remove(in-1);
+                                                    store.Maged.remove(in-1);
+
+
+                                                }
+                                                else
+                                                    System.out.println("You don't have enough money!! go out and earn some!!");
+                                                System.out.println("Where do you want to go? \n1-cave\n2-store\n3-clinic\n4-pet your " + animals[pet].name());
+                                                location = input.nextInt();
+                                                break;
+                                            }
+                                            //mage store ends
+                                            else if(W){//warrior store begins
+                                                store.getItems_Warrior();
+                                                System.out.println("\nYou have " + warrior.Money + "coins chose what do you want to buy:\n");
+                                                in = input.nextInt();
+                                                if(store.Warriorp.get(in-1) <= warrior.Money){
+                                                    System.out.println("You have bought " + store.Warriorw.get(in-1) + "!!");
+                                                    warrior.Money = warrior.Money - store.Warriorp.get(in-1);
+                                                    stat = store.Warriord.get(in-1);
+
+                                                    store.Warriorw.remove(in-1);
+                                                    store.Warriorp.remove(in-1);
+                                                    store.Warriord.remove(in-1);
+
+
+                                                }
+                                                else
+                                                    System.out.println("You don't have enough money!! go out and earn some!!");
+                                                System.out.println("Where do you want to go? \n1-cave\n2-store\n3-clinic\n4-pet your " + animals[pet].name());
+                                                        location = input.nextInt();
+                                                break;
+                                            }
+                                            break;
+                                        }
+                                        //warrior store ends
+//store case ends
+
+                                        case 3: //clinic case
+                                            System.out.println("Welcome to the clinic to heal yourself you must pay 5 coins\n 1-heal\n2-leave\n");
+                                            in = input.nextInt();
+                                            if (in == 2){
+                                                System.out.println("Where do you want to go? \n1-cave\n2-store\n4-pet your " + animals[pet].name());
+                                                location = input.nextInt();
+                                            }
+                                            else
+                                                clinic.healPlayer(archer, warrior, mage);
+                                            System.out.println("You have been treated");
+                                            System.out.println("Where do you want to go? \n1-cave\n2-store\n3-clinic\n4-pet your " + animals[pet].name());
+                                            location = input.nextInt();
+                                            break;
+//end of clinic case
+                                        case 4://pet case
+                                            System.out.println("do you want to pet your "+animals[pet].name()+" or feed it");
+                                            in = input.nextInt();
+                                            switch(in){
+                                                case 1:
+                                                    animals[pet].sound();
+                                                    System.out.println("Where do you want to go? \n1-cave\n2-store\n3-Clinic");
+                                                    location = input.nextInt();
+                                                    break; //end of pet
+                                                case 2:
+                                                    animals[pet].feed();
+                                                    System.out.println("Where do you want to go? \n1-cave\n2-store\n3-Clinic");
+                                                    location = input.nextInt();
+                                                    break;
+
+                                                default:
+                                                    System.out.println("Your pet waited for you but you did nothing");
+                                            }
+
+                                        default:
+                                            break;
+                                        //end of pet case
+                                    } //end of location switch
+                                }// end of location while
+
+                                //after the loop it will always enter to the end game method
+
+                                System.out.println(name + " here you are, we need your help!!\nThere is a dragon coming for the city and we need someone to stop it\nunfortunately the guards have fallen against it and you are our last hope ");
+                                System.out.println("\n\nAfter some time you arrived to the last point in your journey...there it is...a huge lizard like creature\nengulfed in red scales...looking at you while standing over tens? no...hundreds of adventurer corpses..*galp*\nyou realized...it is now or never");
+                                cave.ENDGAME(mage, archer, warrior, M, A, W, stat);
+                                break;
+
+
+                        } // User ends
+
+
+                        break;
+                    }//play ends
+
+                    case 2:
+                        //quit
+                        System.out.println("exit");
+                        break;
+
+
+                    default:
+                        System.out.println("invalid choice 1 to start 2 to exit \n");
+
+
+                }
+            }
+        }
+
+
+
+
+
+        //animal stuff methods
+
+        public static void AnimalSound(Animals animal){
+            animal.sound();
+        }
+        public static void Animalfeed(Animals animal){
+            animal.feed();
+        }
+        public static void Animalname(Animals animal){
+            animal.name();
+        }
+
+
+    }
+

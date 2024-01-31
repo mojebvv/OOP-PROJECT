@@ -1,0 +1,45 @@
+//public class Warrior {
+//}
+
+//warrior
+//        *****************
+
+import java.util.Random;
+
+public class Warrior extends Player {
+    //crit max value and minimum
+    int crm , crl;
+    Warrior (){
+        super();
+        crm = 40;
+        crl = 15;
+        Hp = 100;
+        Lv = 1;
+        Atk = 30;
+        Money = 50;
+        MAXHP = Hp;
+    }
+
+    public int CritDmg(){
+
+        Random random = new Random();
+        int x = random.nextInt((this.crm - this.crl) + 1);
+        return x;
+    }
+
+    public String Lvlup(int xp , int lv){
+        if (xp >= (lv*10)){
+            this.crm += 10;
+            this.crl += 5;
+            this.MAXHP += 25;
+
+            this.Atk += 10;
+            this.Money += 10;
+            this.Xp = 0;
+            this.Lv += 1;
+            return ("Congrats you have reached level " + this.Lv + " your stats have increaased" );
+        }
+        else
+         return ("you dont have enough xp to level up yet" );
+    }
+}

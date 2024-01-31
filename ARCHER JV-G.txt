@@ -1,0 +1,59 @@
+//public class Archer {
+//    Archer
+//****************
+//
+
+
+        import java.util.Random;
+
+    /**
+     *
+     * @author yasir
+     */
+    public class Archer extends Player {
+
+
+        int evade;
+        Archer(){
+            super();
+            Hp = 60;
+            Lv = 1;
+            Atk = 15;
+            Money = 50;
+            MAXHP = Hp;
+            Xp = 0;
+            evade = 20; //+3 each level
+        }
+
+        //evade_chance to compare each attack
+        public boolean EvadeChance(int Ev){
+
+            int min = 0 , max = 100;
+            Random random = new Random();
+            int x = random.nextInt((max - min) + 1);
+
+            if (Ev >= x)
+                return true;
+            else
+                return false;
+        }
+
+        //in each class diffrently
+        public String Lvlup(int xp , int lv){
+
+            if (xp >= (lv*10)){
+                this.evade += 3;
+                this.MAXHP += 20;
+
+                this.Atk += 10;
+                this.Money += 10;
+                this.Xp = 0;
+                this.Lv += 1;
+                return ("Congrats you have leveled up!\nHp = " +this.Hp+ "\nAtk = " + this.Atk  );
+            }
+            return ("you dont have enough xp to level up yet" );
+        }
+
+
+    }
+
